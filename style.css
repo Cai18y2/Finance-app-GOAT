@@ -1,7 +1,7 @@
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 :root{--bg:#0A0F1A;--card:#111827;--mid:#1C2432;--border:#252F3E;--green:#34D399;--blue:#5E9BFF;--gold:#D4A017;--red:#F87171;--white:#F0F4FF;--grey:#6B7280;--dim:#374151}
 body{background:var(--bg);font-family:-apple-system,BlinkMacSystemFont,sans-serif;color:var(--white);display:flex;justify-content:centre;}
-#app{max-width:430px;margin:0 auto;height:100vh;display:flex;flex-direction:column;position:relative}
+#app{max-width:500px;padding:16px;margin:0 auto;height:100vh;display:flex;flex-direction:column;position:relative}
 #content{flex:1;overflow-y:auto;padding-bottom:90px;-webkit-overflow-scrolling:touch;scrollbar-width:none}
 #content::-webkit-scrollbar{display:none}
 .view{display:none}.view.active{display:block}
