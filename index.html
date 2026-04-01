@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <title>Untitled</title>
+    <link rel="stylesheet" href="./style.css">
+
+  </head>
+    
+  <body>
+  <div id="app">
+  <div id="content">
+    <div class="view active" id="view-0">
+      <div class="page-header">
+        <div style="font-size:13px;color:var(--grey);font-weight:500">Good morning</div>
+        <div style="font-size:26px;font-weight:700;letter-spacing:-.5px">Alex 👋</div>
+      </div>
+      <div class="hero-card">
+        <div class="hero-glow"></div>
+        <div class="label" style="margin-bottom:4px">Net Worth</div>
+        <div class="hero-balance" id="hero-balance">£0.00</div>
+        <div style="font-size:12px;color:rgba(52,211,153,.6)">Updated just now</div>
+        <div class="hero-grid">
+          <div class="hero-item"><div class="hero-item-l">Income</div><div class="hero-item-v" style="color:var(--blue)" id="h-income">£3,500</div></div>
+          <div class="hero-item"><div class="hero-item-l">Bills</div><div class="hero-item-v" style="color:var(--red)" id="h-bills">£700</div></div>
+          <div class="hero-item"><div class="hero-item-l">Left</div><div class="hero-item-v" style="color:var(--green)" id="h-left">£2,800</div></div>
+        </div>
+      </div>
+      <div class="stat-row">
+        <div class="stat-card" onclick="openEdit('income',state.income,'Base Salary')">
+          <div class="stat-icon">💰</div>
+          <div class="stat-val" style="color:var(--blue)" id="s-income">£3,500</div>
+          <div class="stat-lbl">Base salary · tap</div>
+        </div>
+        <div class="stat-card" onclick="openEdit('commission',state.commission,'Commission')">
+          <div class="stat-icon">💼</div>
+          <div class="stat-val" style="color:var(--gold)" id="s-comm">£0</div>
+          <div class="stat-lbl">Commission · tap</div>
+        </div>
+      </div>
+      <div class="stat-row">
+        <div class="stat-card">
+          <div class="stat-icon">📊</div>
+          <div class="stat-val" style="color:var(--red)" id="s-billsrate">20%</div>
+          <div class="stat-lbl">Bills / income</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon">📈</div>
+          <div class="stat-val" style="color:var(--green)" id="s-saverate">41%</div>
+          <div class="stat-lbl">Save rate</div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="label">Goals Progress</div>
+        <div id="home-goals"></div>
+      </div>
+    </div>
+
+    <div class="view" id="view-1">
+      <div class="page-header">
+        <div style="font-size:26px;font-weight:700;letter-spacing:-.5px">Budget 💳</div>
+        <div style="font-size:13px;color:var(--grey)">Monthly breakdown</div>
+      </div>
+      <div class="card">
+        <div class="label">Bills Breakdown</div>
+        <div id="bills-list"></div>
+        <div class="divider"></div>
+        <div class="row"><span style="font-size:13px;font-weight:700">Total Bills</span><span style="font-size:20px;font-weight:800;color:var(--red)" id="total-bills">£0</span></div>
+      </div>
+      <div class="card">
+        <div class="label">Allocation</div>
+        <div style="display:flex;align-items:center;gap:16px">
+          <svg width="120" height="120" id="pie-svg"></svg>
+          <div style="flex:1" id="pie-legend"></div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="label">Monthly Split</div>
+        <div id="monthly-split"></div>
+      </div>
+    </div>
+
+    <div class="view" id="view-2">
+      <div class="page-header">
+        <div style="font-size:26px;font-weight:700;letter-spacing:-.5px">Goals ◎</div>
+        <div style="font-size:13px;color:var(--grey)">Track your targets</div>
+      </div>
+      <div id="goals-list"></div>
+    </div>
+
+    <div class="view" id="view-3">
+      <div class="page-header">
+        <div style="font-size:26px;font-weight:700;letter-spacing:-.5px">Invest ↗</div>
+        <div style="font-size:13px;color:var(--grey)">Projection at 7% p.a.</div>
+      </div>
+      <div class="card-dark" onclick="openEdit('invested',state.invested,'Monthly Contribution')" style="cursor:pointer">
+        <div class="label">Monthly ISA Contribution</div>
+        <div class="row">
+          <span style="font-size:14px">Portfolio / ISA</span>
+          <div><span style="font-size:26px;font-weight:800;color:var(--green)" id="inv-monthly">£980</span><span style="font-size:13px;color:var(--grey)"> /mo</span></div>
+        </div>
+        <div style="font-size:10px;color:var(--dim);text-align:right;margin-top:4px">Tap to edit</div>
+      </div>
+      <div class="card">
+        <div class="label">Compound Growth</div>
+        <div id="projections"></div>
+      </div>
+      <div class="card">
+        <div class="label">ISA Allowance</div>
+        <div class="row"><span style="font-size:13px">Annual limit</span><span style="font-size:15px;font-weight:700;color:var(--grey)">£20,000</span></div>
+        <div class="divider"></div>
+        <div class="row"><span style="font-size:13px">Monthly</span><span style="font-size:15px;font-weight:700;color:var(--blue)" id="isa-monthly">£980</span></div>
+        <div class="divider"></div>
+        <div class="row"><span style="font-size:13px">Tax year total</span><span style="font-size:15px;font-weight:700;color:var(--green)" id="isa-total">£11,760</span></div>
+        <div style="background:var(--mid);border-radius:6px;height:8px;overflow:hidden;margin-top:12px"><div id="isa-bar" style="height:100%;border-radius:6px;background:linear-gradient(90deg,rgba(94,155,255,.5),#5E9BFF);width:58.8%"></div></div>
+        <div class="row" style="margin-top:6px"><span style="font-size:10px;color:var(--grey)" id="isa-used">£11,760 used</span><span style="font-size:10px;color:var(--grey)">£20,000 limit</span></div>
+      </div>
+    </div>
+
+    <div class="view" id="view-4">
+      <div class="page-header">
+        <div style="font-size:26px;font-weight:700;letter-spacing:-.5px">Commission 💼</div>
+        <div style="font-size:13px;color:var(--grey)">Track what you've earned</div>
+      </div>
+      <div class="stat-row">
+        <div class="stat-card"><div class="stat-icon">💰</div><div class="stat-val" style="color:var(--gold)" id="ytd-total">£0</div><div class="stat-lbl">YTD Total</div></div>
+        <div class="stat-card"><div class="stat-icon">📊</div><div class="stat-val" style="color:#F472B6" id="avg-comm">£0</div><div class="stat-lbl">Monthly Avg</div></div>
+      </div>
+      <div class="card">
+        <div class="label" style="margin-bottom:10px">Monthly Chart</div>
+        <div style="display:flex;align-items:flex-end;gap:3px;height:80px" id="comm-chart"></div>
+        <div style="font-size:10px;color:var(--dim);text-align:center;margin-top:8px">Tap any bar to log</div>
+      </div>
+      <div class="card">
+        <div class="label">Monthly Log</div>
+        <div id="comm-months"></div>
+      </div>
+    </div>
+  </div>
+
+  <div id="tabbar">
+    <button class="tab-btn active" onclick="switchTab(0)" id="tab-0"><span class="tab-icon">⌂</span><span class="tab-label">Home</span><span class="tab-dot"></span></button>
+    <button class="tab-btn" onclick="switchTab(1)" id="tab-1"><span class="tab-icon">₤</span><span class="tab-label">Budget</span></button>
+    <button class="tab-btn" onclick="switchTab(2)" id="tab-2"><span class="tab-icon">◎</span><span class="tab-label">Goals</span></button>
+    <button class="tab-btn" onclick="switchTab(3)" id="tab-3"><span class="tab-icon">↗</span><span class="tab-label">Invest</span></button>
+    <button class="tab-btn" onclick="switchTab(4)" id="tab-4"><span class="tab-icon">💼</span><span class="tab-label">Commission</span></button>
+  </div>
+
+  <div id="modal-overlay" onclick="closeModal()">
+    <div id="modal-sheet" onclick="event.stopPropagation()">
+      <div style="width:40px;height:4px;background:var(--dim);border-radius:2px;margin:0 auto 20px"></div>
+      <div style="font-size:11px;color:var(--grey);letter-spacing:.8px;text-transform:uppercase;font-weight:600;margin-bottom:8px" id="modal-label">Amount (£)</div>
+      <input type="number" id="modal-input" inputmode="decimal" placeholder="0.00" onkeydown="if(event.key==='Enter')saveModal()">
+      <button id="modal-save" onclick="saveModal()">Save</button>
+    </div>
+  </div>
+</div>
+    <script  src="./script.js"></script>
+
+  </body>
+  
+</html>
